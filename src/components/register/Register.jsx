@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react';
-import { fetchSpotifyApi } from '../../api/spotifyAPIDemo';
 import { useNavigate } from 'react-router-dom';
+import { authFLow, getDataAuth } from '../../setup';
+import { fetchSpotifyApi } from '../../api/spotifyAPIDemo';
 
 const Register = () => {
 
@@ -23,15 +25,20 @@ const Register = () => {
     setForm(newValues);
   };
 
+  // const handleLogin = async () => {
+  //   const codeChallengeProm = await getDataAuth();
+  //   authFLow(codeChallengeProm);
+  // };
+
 
   const handleLogin = async () => {
 
     const client_id = 'your_client_id';
-    const client_secret = 'yout_client_secret';
+    const client_secret = 'your_client_secret';
     const url = 'https://accounts.spotify.com/api/token';
     const body = 'grant_type=client_credentials';
     const token = 'Basic ' + btoa(client_id + ':' + client_secret);
-
+    
     const response = await fetchSpotifyApi(
       url,
       'POST',
@@ -39,22 +46,23 @@ const Register = () => {
       'application/x-www-form-urlencoded',
       token
     );
-
+    
     navigate('/dashboard');
+    localStorage.setItem('token', response.access_token);
     console.log(response);
     
   };
 
   return (
     <div className="bg-gradient-to-t from-[#030303] to-[#282828] h-dvh w-screen flex items-center justify-center">
-      <div className="flex justify-center items-center flex-col h-[350px] w-[250px] bg-[#121212] rounded-sm space-y-4">
-        <div className="text-[14px] text-white">COMPONENTE REGISTER PERO DEBE SER LOGIN in Music</div>
+      <div className="flex justify-center items-center flex-col h-[60%] w-[40%] bg-[#121212] rounded-sm space-y-4">
+        <div className="text-[30px] text-white">Login in Music</div>
 
         <div className="flex flex-col text-white text-[10px] justify-center items-center ">
           <div className="flex  flex-col justify-center  space-y-1">
             <p className="text-left text-[8px]">Email or username</p>
             <input
-              className="rounded-[2px] h-5 text-white bg-[#121212] border-[#727272] border-solid border-[1px] hover:ring-1 focus:ring-1  ring-white"
+              className="rounded-[2px] h-5 w-[160px] text-white bg-[#121212] border-[#727272] border-solid border-[1px] hover:ring-1 focus:ring-1  ring-white"
               placeholder="email"
               type="text"
               name="email"
@@ -63,7 +71,7 @@ const Register = () => {
             />
             <p className="text-left text-[8px]">Password</p>
             <input
-              className="rounded-[2px] h-5 text-white bg-[#121212] border-[#727272] border-solid border-[1px] hover:ring-1 focus:ring-1  ring-white"
+              className="rounded-[2px] h-5 w-[160px] text-white bg-[#121212] border-[#727272] border-solid border-[1px] hover:ring-1 focus:ring-1  ring-white"
               placeholder="Password"
               type="password"
               name="password"
@@ -76,7 +84,7 @@ const Register = () => {
         <div>
           <button
             onClick={handleLogin}
-            className="bg-[#1BD760] w-[100px] rounded-[5px] text-[8px] p-1 font-bold "
+            className="bg-[#1BD760] w-[140px] rounded-[5px] text-[15px] p-1 font-bold "
           >
             Log in
           </button>
