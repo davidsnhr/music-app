@@ -25,33 +25,32 @@ const Register = () => {
     setForm(newValues);
   };
 
-  // const handleLogin = async () => {
-  //   const codeChallengeProm = await getDataAuth();
-  //   authFLow(codeChallengeProm);
-  // };
-
-
   const handleLogin = async () => {
-
-    const client_id = 'your_client_id';
-    const client_secret = 'your_client_secret';
-    const url = 'https://accounts.spotify.com/api/token';
-    const body = 'grant_type=client_credentials';
-    const token = 'Basic ' + btoa(client_id + ':' + client_secret);
-    
-    const response = await fetchSpotifyApi(
-      url,
-      'POST',
-      body,
-      'application/x-www-form-urlencoded',
-      token
-    );
-    
-    navigate('/dashboard');
-    localStorage.setItem('token', response.access_token);
-    console.log(response);
-    
+    const codeChallengeProm = await getDataAuth();
+    authFLow(codeChallengeProm);
   };
+
+
+  // const handleLogin = async () => {
+
+  //   const client_id = ';
+  //   const client_secret = '';
+  //   const url = 'https://accounts.spotify.com/api/token';
+  //   const body = 'grant_type=client_credentials';
+  //   const token = 'Basic ' + btoa(client_id + ':' + client_secret);
+    
+  //   const response = await fetchSpotifyApi(
+  //     url,
+  //     'POST',
+  //     body,
+  //     'application/x-www-form-urlencoded',
+  //     token
+  //   );
+    
+  //   navigate('/dashboard');
+  //   localStorage.setItem('token', response.access_token);
+  //   console.log(response);
+  // };
 
   return (
     <div className="bg-gradient-to-t from-[#030303] to-[#282828] h-dvh w-screen flex items-center justify-center">
